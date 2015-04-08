@@ -14,14 +14,12 @@ namespace Drawing
         Pen myPen = new Pen(Color.Black);
         private Graphics g = null;
 
-        private static int center_x, center_y;
         private static int start_x, start_y;
         private static int end_x, end_y;
 
         private static int my_angle = 0;
         private static int my_length = 0;
         private static int my_increment = 0;
-        private static int numLines = 0;
 
         public Form1()
         {
@@ -32,15 +30,19 @@ namespace Drawing
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-            
-
             myPen.Width = 2;
+            start_x = canvas.Width / 2;
+            start_y = canvas.Height / 2;
+            my_length = Convert.ToInt32(length.Text);
             g = canvas.CreateGraphics();
+            for (int i = 0; i < Convert.ToInt32(numerOfLines.Text); i++)
             drawLine();
         }
 
         private void drawLine()
         {
+            Random randomGen = new Random();
+            myPen.Color = Color.FromArgb(randomGen.Next(255), randomGen.Next(255), randomGen.Next(255));
             my_angle = my_angle + Convert.ToInt32(angle.Text);
             my_length = my_length + Convert.ToInt32(length.Text);
 
