@@ -26,12 +26,26 @@ namespace Drawing
         public Form1()
         {
             InitializeComponent();
+            start_x = canvas.Width / 2;
+            start_y = canvas.Height / 2;
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-
+            myPen.Width = 2;
+            g = canvas.CreateGraphics();
+            drawLine();
         }
+
+        private void drawLine()
+        {
+            Point[] points =
+            {
+                new Point(start_x, start_y), 
+                new Point(start_x + 100, start_y + 100),
+            };
+            g.DrawLines(myPen, points); //Null reference vuln
+        } //end drawline
 
         private void button1_Click(object sender, EventArgs e)
         {
